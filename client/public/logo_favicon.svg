@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title2 desc2">
+  <title id="title2">ShopEase icon — green bag</title>
+  <desc id="desc2">Square app/social icon: green gradient bag with white S.</desc>
+  <defs>
+    <linearGradient id="greenGrad2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1db954"/>
+      <stop offset="1" stop-color="#0aa66b"/>
+    </linearGradient>
+    <filter id="softShadow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#004022" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="64" fill="#fbfdfb"/>
+  <g transform="translate(112,96)" filter="url(#softShadow2)">
+    <rect x="0" y="20" rx="34" ry="34" width="288" height="288" fill="url(#greenGrad2)"/>
+    <path d="M52 20 C52 -6,236 -6,236 20" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+    <path d="M78 200 C78 160,154 160,154 140 C154 120,78 120,78 80" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M78 240 C78 280,236 280,236 240" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
