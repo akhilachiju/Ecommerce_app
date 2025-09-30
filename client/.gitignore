@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 doc.txt
 assets
+# ecommerce_app/client/src/assets
 
 dist
 dist-ssr
