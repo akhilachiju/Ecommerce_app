@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   button,
   featureCard,
@@ -41,7 +42,9 @@ const Hero = () => {
             </p>
 
             <div>
-              <button className={button}>Shop Now</button>
+              <Link to="/shop">
+                <button className={button}>Shop Now</button>
+              </Link>
               <p className="text-gray-500 text-sm mt-3">
                 Save up to{" "}
                 <span className="text-green-600 font-medium">50% off</span> on
