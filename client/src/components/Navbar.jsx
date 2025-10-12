@@ -1,8 +1,8 @@
+// src/components/Navbar.jsx
 import React, { useState } from "react";
-import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { RiNotification2Line } from "react-icons/ri";
-import { LuHeart } from "react-icons/lu";
+import logo from "../assets/logo.svg";
+import { RiNotification2Line, RiHeartLine } from "react-icons/ri";
 import { HiOutlineShoppingBag, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import {
   navbarContainer,
@@ -25,62 +25,67 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
-      <div className={navbarContainer}>
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="Shop ease logo" className={logoImage} />
-          <span className="text-2xl md:text-3xl font-bold text-black">
-            Ease
-          </span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className={navLinks}>
-          {links.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className={`${colors.black} ${colors.primary} ${cursors.pointer}`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Icons + Mobile Menu */}
-        <div className={iconGroup}>
-          <Link to="/notification" className={cursors.pointer}>
-            <RiNotification2Line className={`w-6 h-6 ${colors.primary}`} />
-          </Link>
-
-          <Link to="/wishlist" className={cursors.pointer}>
-            <LuHeart className={`w-6 h-6 ${colors.primary}`} />
-          </Link>
-
-          <Link to="/cart" className={`relative ${cursors.pointer}`}>
-            <HiOutlineShoppingBag className={`w-6 h-6 ${colors.primary}`} />
-            <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
-              3
+    <nav className="bg-gray-100 w-full">
+      <div className="max-w-[1280px] mx-auto">
+        <div className={navbarContainer}>
+          {/* LEFT: Logo */}
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="ShopEase logo" className={logoImage} />
+            <span className="text-2xl md:text-3xl font-bold text-black ml-2">
+              Ease
             </span>
           </Link>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className={`md:hidden ${cursors.pointer} focus:outline-none`}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <HiX className={`w-7 h-7 ${colors.black}`} />
-            ) : (
-              <HiOutlineMenuAlt3 className={`w-7 h-7 ${colors.black}`} />
-            )}
-          </button>
+          {/* MIDDLE: Navigation Links */}
+          <div className={navLinks}>
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`${colors.primary} ${cursors.pointer} font-medium`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* RIGHT: Icons */}
+          <div className={iconGroup}>
+            {/* Notification */}
+            <Link to="/notifications" className={cursors.pointer}>
+              <RiNotification2Line className={`w-6 h-6 ${colors.primary}`} />
+            </Link>
+
+            {/* Wishlist */}
+            <Link to="/wishlist" className={cursors.pointer}>
+              <RiHeartLine className={`w-6 h-6 ${colors.primary}`} />
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cart" className={`relative ${cursors.pointer}`}>
+              <HiOutlineShoppingBag className={`w-6 h-6 ${colors.primary}`} />
+              <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
+                3
+              </span>
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              className={`md:hidden ${cursors.pointer} focus:outline-none`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? (
+                <HiX className={`w-7 h-7 ${colors.black}`} />
+              ) : (
+                <HiOutlineMenuAlt3 className={`w-7 h-7 ${colors.black}`} />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <div
         className={`${mobileMenu} ${
           menuOpen
@@ -93,7 +98,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`${colors.black} ${colors.primary} ${cursors.pointer}`}
+              className={`${colors.primary} ${cursors.pointer}`}
               onClick={() => setMenuOpen(false)}
             >
               {link.name}
@@ -106,4 +111,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
