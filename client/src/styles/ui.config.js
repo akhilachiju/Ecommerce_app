@@ -1,3 +1,5 @@
+// ui.config.js
+
 // Unified responsive container for all sections
 export const container = `
   max-w-[1280px] 
@@ -60,11 +62,32 @@ export const featureIcon = "w-12 h-12 mb-4";
 export const featureTitle = "font-bold text-gray-900 mb-2";
 export const featureDesc = "text-gray-600 text-sm";
 
-// Breakpoints (Tailwind default aliases)
-export const breakpoints = {
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-  "2xl": "2xl",
-};
+// 🆕 Category Section Styles
+export const categoryCard = `
+  flex flex-col items-center
+`;
+
+export const categoryImage = `
+  relative group overflow-hidden rounded-xl shadow-sm 
+  hover:shadow-lg transition duration-300 w-full
+`;
+
+export const categoryImgStyle = `
+  w-full h-full object-cover 
+  transition-transform duration-500 group-hover:scale-110
+`;
+
+export const verticalTag = `
+  absolute top-0 left-0 h-full bg-black/60 
+  text-white flex items-center justify-center px-2
+`;
+
+export const horizontalTag = `
+  absolute bottom-0 left-0 w-full bg-black/60 
+  text-white text-center py-2
+`;
+
+export const categoryTagText = `
+  text-lg font-semibold
+`;
+
