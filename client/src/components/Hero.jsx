@@ -5,6 +5,7 @@ import {
   featureIcon,
   featureTitle,
   featureDesc,
+  container,
 } from "../styles/ui.config";
 
 import shippingIcon from "../assets/shipping.png";
@@ -17,67 +18,88 @@ const Hero = () => {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="bg-gray-100 py-10 md:py-20">
-        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-10 lg:px-16">
-          
+      <section className="relative bg-gray-100 overflow-hidden py-16 md:py-24">
+        <div
+          className={`${container} relative flex flex-col md:flex-row items-center justify-between`}
+        >
           {/* LEFT CONTENT */}
-          <div className="flex flex-col space-y-6 max-w-xl text-center md:text-left">
+          <div className="flex flex-col space-y-6 max-w-xl text-center md:text-left z-20">
             <div>
-              <p className="text-sm font-bold text-gray-500 tracking-wide">New Arrival —</p>
+              <p className="text-sm font-bold text-gray-500 tracking-wide">
+                New Arrival —
+              </p>
               <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-2">
                 Limited Collection For <br />
-                <span className="">Men’s & Women’s Fashion</span>
+                <span>Men’s & Women’s Fashion</span>
               </h1>
             </div>
 
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               From street wear essentials to elegant looks — explore our new
-              season collection crafted for everyone. Stay stylish, confident, and
-              comfortable all day long.
+              season collection crafted for everyone. Stay stylish, confident,
+              and comfortable all day long.
             </p>
 
             <div>
               <button className={button}>Shop Now</button>
               <p className="text-gray-500 text-sm mt-3">
-                Save up to <span className="text-green-600 font-medium">50% off</span>  on seasonal favorites!
+                Save up to{" "}
+                <span className="text-green-600 font-medium">50% off</span> on
+                seasonal favorites!
               </p>
             </div>
           </div>
 
-          {/* RIGHT IMAGE WITH WHITE CIRCLE */}
+          {/* RIGHT IMAGE with animated background */}
           <div className="relative flex justify-center items-center mt-10 md:mt-0">
-            
+            {/* Animated Circles Behind Image */}
+            <div className="absolute inset-0 flex items-center justify-center z-0">
+              <div className="absolute w-40 h-40 bg-green-500 rounded-full opacity-20 animate-wave"></div>
+              <div className="absolute w-40 h-40 bg-green-500 rounded-full opacity-15 animate-wave delay-[1s]"></div>
+              <div className="absolute w-40 h-40 bg-green-500 rounded-full opacity-10 animate-wave delay-[2s]"></div>
+            </div>
+
             {/* Hero Image */}
             <img
               src={heroImage}
               alt="Men's Fashion Hero"
-              className="w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] relative z-10 object-contain drop-shadow-lg"
+              className="relative w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] object-contain drop-shadow-lg z-10"
             />
           </div>
         </div>
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <section
+        className={`${container} py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6`}
+      >
         <div className={featureCard}>
           <img className={featureIcon} src={shippingIcon} alt="Shipping Icon" />
           <span className={featureTitle}>FREE SHIPPING</span>
-          <span className={featureDesc}>Free worldwide shipping on all orders.</span>
+          <span className={featureDesc}>
+            Free worldwide shipping on all orders.
+          </span>
         </div>
         <div className={featureCard}>
           <img className={featureIcon} src={returnIcon} alt="Return Icon" />
           <span className={featureTitle}>30 DAYS RETURN</span>
-          <span className={featureDesc}>No question return and easy refund in 14 days.</span>
+          <span className={featureDesc}>
+            No question return and easy refund in 14 days.
+          </span>
         </div>
         <div className={featureCard}>
           <img className={featureIcon} src={giftIcon} alt="Gift Icon" />
           <span className={featureTitle}>GIFT CARDS</span>
-          <span className={featureDesc}>Buy gift cards and use coupon codes easily.</span>
+          <span className={featureDesc}>
+            Buy gift cards and use coupon codes easily.
+          </span>
         </div>
         <div className={featureCard}>
           <img className={featureIcon} src={contactIcon} alt="Contact Icon" />
           <span className={featureTitle}>CONTACT US!</span>
-          <span className={featureDesc}>Keep in touch via email and support system.</span>
+          <span className={featureDesc}>
+            Keep in touch via email and support system.
+          </span>
         </div>
       </section>
     </>

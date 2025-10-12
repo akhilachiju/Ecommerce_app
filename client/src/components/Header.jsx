@@ -1,13 +1,13 @@
-// src/components/Header.jsx
 import React from "react";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { container } from "../styles/ui.config";
 
 const Header = () => {
   return (
-    <header className="bg-black text-white text-sm py-2 px-4">
-      <div className="max-w-[1280px] mx-auto flex items-center justify-between">
+    <header className="bg-black text-white text-sm py-2">
+      <div className={`${container} flex items-center justify-between`}>
         {/* LEFT: Promo Text */}
         <div className="flex items-center">
           <TbTruckDelivery className="text-md mr-2" />
@@ -24,7 +24,7 @@ const Header = () => {
             Login
           </Link>
         </div>
-      </div>  
+      </div>
     </header>
   );
 };
