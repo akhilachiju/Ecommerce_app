@@ -1,17 +1,15 @@
-// Responsive Breakpoints (Tailwind default)
-export const breakpoints = {
-  sm: "sm",       
-  md: "md",       
-  lg: "lg",       
-  xl: "xl",       
-  "2xl": "2xl",   
-};
+// Unified responsive container for all sections
+export const container = `
+  max-w-[1280px] 
+  mx-auto 
+  px-4 sm:px-6 md:px-8
+`;
 
 // Navbar Container
 export const navbarContainer = `
   flex items-center justify-between
-  px-4 sm:px-6 md:px-10 lg:px-16
   py-3 sm:py-4
+  ${container}
 `;
 
 // Navigation Links (Desktop)
@@ -41,7 +39,7 @@ export const cursors = {
   pointer: "cursor-pointer",
 };
 
-// Mobile Menu Animation
+// Mobile Menu
 export const mobileMenu = `
   md:hidden bg-white border-t border-gray-200 shadow-lg
   transition-all duration-300 ease-in-out transform
@@ -49,12 +47,12 @@ export const mobileMenu = `
 
 // Button Styles
 export const button = `
-  bg-white text-black font-medium
+  bg-black text-white font-medium
   px-6 py-3 rounded-full
   hover:bg-green-600 transition-colors duration-300
 `;
 
-// Features Card
+// Features Section
 export const featureCard = `
   flex flex-col items-center text-center p-4
 `;
@@ -62,3 +60,11 @@ export const featureIcon = "w-12 h-12 mb-4";
 export const featureTitle = "font-bold text-gray-900 mb-2";
 export const featureDesc = "text-gray-600 text-sm";
 
+// Breakpoints (Tailwind default aliases)
+export const breakpoints = {
+  sm: "sm",
+  md: "md",
+  lg: "lg",
+  xl: "xl",
+  "2xl": "2xl",
+};
