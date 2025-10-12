@@ -12,12 +12,14 @@ import Orders from "./pages/Orders";
 import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <div>
+      <Header />
       <Navbar />
-      <div className="pt-25">
+      <div className="">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
