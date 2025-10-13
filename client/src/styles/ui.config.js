@@ -113,5 +113,42 @@ export const contactForm = `space-y-4 bg-white p-6 rounded-lg shadow-sm`;
 export const formLabel = `block text-gray-700 mb-1`;
 export const formInput = `w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500`;
 
+// Section Wrapper
+export const section = `
+  py-16 m-6 bg-white
+`;
 
+// Section Title
+export const sectionTitle = `
+  text-3xl md:text-4xl font-bold text-gray-900 mb-4
+`;
 
+// Section Description
+export const sectionDesc = `
+  text-gray-600 mb-6 max-w-2xl mx-auto
+`;
+
+// Card (for Mission, Vision, Values)
+export const infoCard = `
+  p-6 bg-gray-50 rounded-xl shadow-sm text-center
+`;
+
+// Card Title
+export const cardTitle = `
+  text-xl font-bold mb-2
+`;
+
+// Card Text
+export const cardText = `
+  text-gray-600
+`;
+
+// Subsection Title (Our Story)
+export const subsectionTitle = `
+  text-3xl font-bold text-gray-900 mb-6 text-center
+`;
+
+// Subsection Description
+export const subsectionText = `
+  text-gray-600 text-center max-w-3xl mx-auto
+`;
