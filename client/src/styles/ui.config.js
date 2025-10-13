@@ -1,4 +1,3 @@
-// ui.config.js
 
 // Unified responsive container for all sections
 export const container = `
@@ -62,7 +61,7 @@ export const featureIcon = "w-12 h-12 mb-4";
 export const featureTitle = "font-bold text-gray-900 mb-2";
 export const featureDesc = "text-gray-600 text-sm";
 
-// 🆕 Category Section Styles
+// Category Section Styles
 export const categoryCard = `
   flex flex-col items-center
 `;
@@ -90,4 +89,29 @@ export const horizontalTag = `
 export const categoryTagText = `
   text-lg font-semibold
 `;
+
+// Contact Section
+export const contactSection = `pt-18 pb-30 bg-gray-50`;
+export const contactHeader = `text-center mb-12`;
+export const contactTitle = `py-3 text-3xl md:text-4xl font-bold text-gray-900`;
+export const contactSubtitle = `text-gray-600 mt-2`;
+
+// Contact Info Card
+export const contactCard = `flex items-start space-x-4 bg-white p-4 rounded-lg shadow-sm`;
+export const contactIconStyle = `w-12 h-12 mt-1`;
+export const contactInfoText = `space-y-1 text-gray-700`;
+
+// FAQ Section
+export const faqSection = `mt-8`;
+export const faqTitle = `text-xl font-bold mb-4`;
+export const faqItem = `border border-gray-200 rounded-md`;
+export const faqButton = `w-full text-left px-4 py-2 flex justify-between items-center bg-gray-100 hover:bg-gray-200`;
+export const faqAnswer = `px-4 py-2 text-gray-700`;
+
+// Contact Form
+export const contactForm = `space-y-4 bg-white p-6 rounded-lg shadow-sm`;
+export const formLabel = `block text-gray-700 mb-1`;
+export const formInput = `w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500`;
+
+
 

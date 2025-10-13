@@ -19,7 +19,7 @@ const Hero = () => {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative bg-gray-100 overflow-hidden py-16 md:py-24">
+      <section className="relative bg-gray-100 overflow-hidden py-12 md:py-20">
         <div
           className={`${container} relative flex flex-col md:flex-row items-center justify-between`}
         >

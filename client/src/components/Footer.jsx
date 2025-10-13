@@ -6,7 +6,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700 mt-20 w-full">
+    <footer className="bg-gray-100 text-gray-700 w-full">
       <div className={`${container} py-10 grid grid-cols-1 md:grid-cols-4 gap-8`}>
         {/* Brand */}
         <div>
@@ -74,7 +74,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/faq" className={`${colors.primary} ${cursors.pointer}`}>
+              <Link to="/contact" className={`${colors.primary} ${cursors.pointer}`}>
                 FAQ
               </Link>
             </li>
@@ -107,7 +107,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-gray-300 text-center py-4 text-sm text-gray-500">
-        © {new Date().getFullYear()} Ease. All rights reserved.
+        © {new Date().getFullYear()} ShopEase. All rights reserved.
       </div>
     </footer>
   );
