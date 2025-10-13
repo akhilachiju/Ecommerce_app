@@ -25,7 +25,7 @@ const categories = [
 
 const BestSeller = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 mb-16 bg-white">
       <div className={container}>
         {/* TITLE */}
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
