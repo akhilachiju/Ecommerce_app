@@ -1,4 +1,5 @@
+// src/context/ShopContext.jsx
 import { createContext } from "react";
 
-// Create the context
+// Create and export the context
 export const ShopContext = createContext();

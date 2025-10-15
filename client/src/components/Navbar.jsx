@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { RiNotification2Line, RiHeartLine } from "react-icons/ri";
 import { HiOutlineShoppingBag, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import { ShopContext } from "../context/ShopContext";
 import {
   navbarContainer,
   navLinks,
@@ -15,6 +16,7 @@ import {
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cartCount } = useContext(ShopContext); //
 
   const links = [
     { name: "Home", path: "/" },
@@ -24,7 +26,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gray-100 w-full">
+    <nav className="bg-gray-100 w-full sticky top-0 z-50 shadow-sm">
       <div className={navbarContainer}>
         {/* LEFT: Logo */}
         <Link to="/" className="flex items-center">
@@ -34,13 +36,13 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* MIDDLE: Links */}
+        {/* MIDDLE: Links (Desktop) */}
         <div className={navLinks}>
           {links.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`${colors.primary} ${cursors.pointer} font-medium`}
+              className={`${colors.primary} ${cursors.pointer} font-medium hover:text-green-600 transition`}
             >
               {link.name}
             </Link>
@@ -57,13 +59,17 @@ const Navbar = () => {
             <RiHeartLine className={`w-6 h-6 ${colors.primary}`} />
           </Link>
 
+          {/* Cart icon with live badge */}
           <Link to="/cart" className={`relative ${cursors.pointer}`}>
             <HiOutlineShoppingBag className={`w-6 h-6 ${colors.primary}`} />
-            <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
-              3
-            </span>
+            {cartCount > 0 && (
+              <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
+                {cartCount}
+              </span>
+            )}
           </Link>
 
+          {/* Mobile Menu Button */}
           <button
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             className={`md:hidden ${cursors.pointer} focus:outline-none`}
@@ -82,14 +88,14 @@ const Navbar = () => {
       <div
         className={`${mobileMenu} ${
           menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-        }`}
+        } transition-all duration-300 ease-in-out`}
       >
         <div className="flex flex-col items-center space-y-4 py-4">
           {links.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`${colors.primary} ${cursors.pointer}`}
+              className={`${colors.primary} ${cursors.pointer} hover:text-green-600 transition`}
               onClick={() => setMenuOpen(false)}
             >
               {link.name}
