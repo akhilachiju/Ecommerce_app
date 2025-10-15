@@ -91,7 +91,7 @@ export const categoryTagText = `
 `;
 
 // Contact Section
-export const contactSection = `pt-18 pb-30 bg-gray-50`;
+export const contactSection = `pt-18 pb-30 bg-white`;
 export const contactHeader = `text-center mb-12`;
 export const contactTitle = `py-3 text-3xl md:text-4xl font-bold text-gray-900`;
 export const contactSubtitle = `text-gray-600 mt-2`;
