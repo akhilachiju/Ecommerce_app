@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { RiNotification2Line, RiHeartLine } from "react-icons/ri";
 import { HiOutlineShoppingBag, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
@@ -16,7 +16,7 @@ import {
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { cartCount } = useContext(ShopContext); //
+  const { cartCount } = useContext(ShopContext);
 
   const links = [
     { name: "Home", path: "/" },
@@ -29,45 +29,51 @@ const Navbar = () => {
     <nav className="bg-gray-100 w-full sticky top-0 z-50 shadow-sm">
       <div className={navbarContainer}>
         {/* LEFT: Logo */}
-        <Link to="/" className="flex items-center">
+        <NavLink to="/" className="flex items-center">
           <img src={logo} alt="ShopEase logo" className={logoImage} />
           <span className="text-2xl md:text-3xl font-bold text-black ml-2">
             Ease
           </span>
-        </Link>
+        </NavLink>
 
         {/* MIDDLE: Links (Desktop) */}
         <div className={navLinks}>
           {links.map((link) => (
-            <Link
+            <NavLink
               key={link.name}
               to={link.path}
-              className={`${colors.primary} ${cursors.pointer} font-medium hover:text-green-600 transition`}
+              className={({ isActive }) =>
+                `relative font-medium px-1 pb-1 transition-all duration-300 ${cursors.pointer} ${
+                  isActive
+                    ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
+                    : `${colors.primary}`
+                }`
+              }
             >
               {link.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
         {/* RIGHT: Icons */}
         <div className={iconGroup}>
-          <Link to="/notifications" className={cursors.pointer}>
+          <NavLink to="/notifications" className={cursors.pointer}>
             <RiNotification2Line className={`w-6 h-6 ${colors.primary}`} />
-          </Link>
+          </NavLink>
 
-          <Link to="/wishlist" className={cursors.pointer}>
+          <NavLink to="/wishlist" className={cursors.pointer}>
             <RiHeartLine className={`w-6 h-6 ${colors.primary}`} />
-          </Link>
+          </NavLink>
 
           {/* Cart icon with live badge */}
-          <Link to="/cart" className={`relative ${cursors.pointer}`}>
+          <NavLink to="/cart" className={`relative ${cursors.pointer}`}>
             <HiOutlineShoppingBag className={`w-6 h-6 ${colors.primary}`} />
             {cartCount > 0 && (
               <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
                 {cartCount}
               </span>
             )}
-          </Link>
+          </NavLink>
 
           {/* Mobile Menu Button */}
           <button
@@ -92,14 +98,20 @@ const Navbar = () => {
       >
         <div className="flex flex-col items-center space-y-4 py-4">
           {links.map((link) => (
-            <Link
+            <NavLink
               key={link.name}
               to={link.path}
-              className={`${colors.primary} ${cursors.pointer} hover:text-green-600 transition`}
+              className={({ isActive }) =>
+                `relative font-medium transition-all duration-300 ${cursors.pointer} ${
+                  isActive
+                    ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
+                    : `${colors.primary}`
+                }`
+              }
               onClick={() => setMenuOpen(false)}
             >
               {link.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>
