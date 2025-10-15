@@ -10,14 +10,16 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import PlaceOrder from "./pages/PlaceOrder";
-import Product from "./pages/Product";
+import Product from "./pages/ProductDetails";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <div>
+      <ScrollToTop />
       <Header />
       <Navbar />
       <div className="">
@@ -32,7 +34,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/place-order" element={<PlaceOrder />} />
-          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/product/:id" element={<Product />} />
         </Routes>
       </div>
       <Footer />
