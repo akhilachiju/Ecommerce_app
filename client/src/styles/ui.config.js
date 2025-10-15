@@ -49,7 +49,7 @@ export const mobileMenu = `
 // Button Styles
 export const button = `
   bg-black text-white font-medium
-  px-6 py-3 rounded-full
+  px-4 py-2 rounded-full
   hover:bg-green-600 transition-colors duration-300
 `;
 
@@ -152,3 +152,13 @@ export const subsectionTitle = `
 export const subsectionText = `
   text-gray-600 text-center max-w-3xl mx-auto
 `;
+
+export const productCard = `
+  bg-white rounded-2xl shadow-sm hover:shadow-lg 
+  transition-all duration-300 overflow-hidden group
+`;
+export const productImage = `
+  w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110
+`;
+export const productInfo = `p-5 flex flex-col justify-between space-y-3`;
+
