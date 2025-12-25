@@ -1,134 +1,106 @@
-import React, { useContext, useState, useMemo } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
-import {
-  container,
-  button,
-  section,
-  sectionTitle,
-  sectionDesc,
-} from "../styles/ui.config";
-import { Link } from "react-router-dom";
+import { 
+  Section, 
+  Container, 
+  SectionHeader, 
+  Input, 
+  Dropdown, 
+  ProductCard, 
+  LoadingSpinner, 
+  ErrorMessage, 
+  EmptyState 
+} from "../components/ui";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 
 const Shop = () => {
   const { products, loading, error } = useContext(ShopContext);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // Extract unique categories
+  // Generate category list
   const categories = useMemo(() => {
     const allCategories = products.map((p) => p.category);
     return ["All", ...new Set(allCategories)];
   }, [products]);
 
-  // Filter logic
+  // Filter products
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesSearch =
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase());
-
+        product.title.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory =
         selectedCategory === "All" || product.category === selectedCategory;
-
       return matchesSearch && matchesCategory;
     });
   }, [products, searchQuery, selectedCategory]);
 
-  // Loading and error states
   if (loading) {
     return (
-      <section className={`${section} flex justify-center items-center`}>
-        <p className="text-lg text-gray-600 animate-pulse">Loading products...</p>
-      </section>
+      <Section className="flex justify-center items-center min-h-[400px]">
+        <LoadingSpinner size="lg" text="Loading products..." />
+      </Section>
     );
   }
 
   if (error) {
     return (
-      <section className={`${section} flex justify-center items-center`}>
-        <p className="text-red-600 text-lg font-medium">{error}</p>
-      </section>
+      <Section className="flex justify-center items-center min-h-[400px]">
+        <ErrorMessage message={error} />
+      </Section>
     );
   }
 
-  // Main render
   return (
-    <section className={section}>
-      <div className={container}>
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className={sectionTitle}>Shop Our Collection</h1>
-          <p className={sectionDesc}>
-            Explore our latest collection — stylish, comfortable, and made for everyone.
-          </p>
-        </div>
+    <Section>
+      <Container>
+        <SectionHeader
+          title="Shop Our Collection"
+          description="Explore our latest collection — stylish, comfortable, and made for everyone."
+        />
 
-        {/* Filters Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-400 text-gray-700"
-          />
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-10">
+          <div className="flex-1">
+            <Input
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
-          {/* Category Dropdown */}
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700"
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </option>
-            ))}
-          </select>
+          <div className="flex-1">
+            <Dropdown
+              options={categories}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              placeholder="Select Category"
+            />
+          </div>
         </div>
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <p className="text-center text-gray-500 text-lg">No products found.</p>
+          <EmptyState
+            title="No products found"
+            description="Try adjusting your search or filter criteria"
+            actionText="Clear Filters"
+            onAction={() => {
+              setSearchQuery("");
+              setSelectedCategory("All");
+            }}
+            icon={HiOutlineShoppingBag}
+          />
         ) : (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
             {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
-              >
-                <Link to={`/product/${product.id}`}>
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={product.thumbnail}
-                      alt={product.title}
-                      className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                </Link>
-
-                <div className="p-5 flex flex-col justify-between space-y-3">
-                  <h2 className="text-lg font-semibold text-gray-900 truncate">
-                    {product.title}
-                  </h2>
-                  <p className="text-gray-600 text-sm line-clamp-2">
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-2">
-                    <span className="text-green-600 font-bold text-lg">
-                      ${product.price}
-                    </span>
-                    <button className={button}>Add to Cart</button>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 

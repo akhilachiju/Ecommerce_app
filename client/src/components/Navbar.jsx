@@ -2,8 +2,13 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { RiNotification2Line, RiHeartLine } from "react-icons/ri";
-import { HiOutlineShoppingBag, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import {
+  HiOutlineShoppingBag,
+  HiOutlineMenuAlt3,
+  HiX,
+} from "react-icons/hi";
 import { ShopContext } from "../context/ShopContext";
+import { IconWithBadge } from "./ui";
 import {
   navbarContainer,
   navLinks,
@@ -16,7 +21,7 @@ import {
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { cartCount } = useContext(ShopContext);
+  const { cartCount, wishlistCount } = useContext(ShopContext); //  get wishlistCount too
 
   const links = [
     { name: "Home", path: "/" },
@@ -26,7 +31,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gray-100 w-full sticky top-0 z-50 shadow-sm">
+    <nav className="backdrop-blur-md bg-white/70 w-full sticky top-0 z-50 shadow-sm">
       <div className={navbarContainer}>
         {/* LEFT: Logo */}
         <NavLink to="/" className="flex items-center">
@@ -57,22 +62,31 @@ const Navbar = () => {
 
         {/* RIGHT: Icons */}
         <div className={iconGroup}>
-          <NavLink to="/notifications" className={cursors.pointer}>
-            <RiNotification2Line className={`w-6 h-6 ${colors.primary}`} />
+          {/* Notifications */}
+          <NavLink to="/notifications">
+            <IconWithBadge 
+              icon={RiNotification2Line}
+              showBadge={false}
+              title="Notifications"
+            />
           </NavLink>
 
-          <NavLink to="/wishlist" className={cursors.pointer}>
-            <RiHeartLine className={`w-6 h-6 ${colors.primary}`} />
+          {/* Wishlist Icon with Badge */}
+          <NavLink to="/wishlist">
+            <IconWithBadge 
+              icon={RiHeartLine}
+              badgeCount={wishlistCount}
+              title="Wishlist"
+            />
           </NavLink>
 
           {/* Cart icon with live badge */}
-          <NavLink to="/cart" className={`relative ${cursors.pointer}`}>
-            <HiOutlineShoppingBag className={`w-6 h-6 ${colors.primary}`} />
-            {cartCount > 0 && (
-              <span className="flex items-center justify-center w-4 h-4 bg-green-600 text-white rounded-full text-xs absolute -top-1.5 -right-1.5">
-                {cartCount}
-              </span>
-            )}
+          <NavLink to="/cart">
+            <IconWithBadge 
+              icon={HiOutlineShoppingBag}
+              badgeCount={cartCount}
+              title="Shopping Cart"
+            />
           </NavLink>
 
           {/* Mobile Menu Button */}

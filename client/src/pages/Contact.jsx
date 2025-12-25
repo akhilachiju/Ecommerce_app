@@ -1,76 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { 
-  container, button, 
-  contactSection, contactHeader, contactTitle, contactSubtitle,
-  contactCard, contactIconStyle, contactInfoText,
-  faqSection, faqTitle, faqItem, faqButton, faqAnswer,
-  contactForm, formLabel, formInput
-} from "../styles/ui.config";
+import { Section, Container, SectionHeader, Input, Button } from "../components/ui";
+import { useForm, useLocalStorage } from "../hooks";
 import contactIcon from "../assets/contact.png";
 
 const faqData = [
   { question: "What is your return policy?", answer: "You can return any product within 30 days of delivery for a full refund." },
   { question: "Do you offer international shipping?", answer: "Yes, we ship worldwide. Shipping fees may vary depending on location." },
-  { question: "How can I track my order?", answer: "Once your order is shipped, you’ll receive a tracking number via email." },
+  { question: "How can I track my order?", answer: "Once your order is shipped, you'll receive a tracking number via email." },
   { question: "Can I change my order after placing it?", answer: "You can modify your order within 2 hours of placing it by contacting support." },
   { question: "How do I contact customer support?", answer: "You can reach out us via email at support@shopease.com or call +1 234 567 890." },
 ];
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
   const [activeFaq, setActiveFaq] = useState(null);
+  const [submissions, setSubmissions] = useLocalStorage("contactFormSubmissions", []);
 
-  // Load saved data from localStorage when component mounts
-  useEffect(() => {
-    const savedData = localStorage.getItem("contactFormSubmissions");
-    if (!savedData) return;
-    console.log("Previous submissions:", JSON.parse(savedData));
-  }, []);
-
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const {
+    values,
+    errors,
+    handleChange,
+    handleBlur,
+    validateForm,
+    resetForm
+  } = useForm(
+    { name: "", email: "", message: "" },
+    {
+      name: { required: true, minLength: 2 },
+      email: { required: true, email: true },
+      message: { required: true, minLength: 10 }
+    }
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) return;
 
-    // Get existing submissions from localStorage
-    const existingSubmissions = JSON.parse(localStorage.getItem("contactFormSubmissions")) || [];
-
-    // Add new submission
-    const updatedSubmissions = [...existingSubmissions, formData];
-
-    // Save back to localStorage
-    localStorage.setItem("contactFormSubmissions", JSON.stringify(updatedSubmissions));
-
+    setSubmissions(prev => [...prev, { ...values, timestamp: new Date().toISOString() }]);
     alert("Message sent successfully!");
-    console.log("Form submitted:", formData);
-    setFormData({ name: "", email: "", message: "" });
+    resetForm();
   };
 
   const toggleFaq = (index) => setActiveFaq(activeFaq === index ? null : index);
 
   return (
-    <section className={contactSection}>
-      <div className={container}>
-        {/* Header */}
-        <div className={contactHeader}>
-          <h2 className={contactTitle}>Get in Touch</h2>
-          <p className={contactSubtitle}>
-            Have questions or feedback? We’d love to hear from you.
-          </p>
-        </div>
+    <Section>
+      <Container>
+        <SectionHeader 
+          title="Get in Touch"
+          description="Have questions or feedback? We'd love to hear from you."
+        />
 
         {/* Grid: Contact Info + Form */}
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Info + FAQ */}
           <div className="space-y-6">
             {/* Contact Info */}
-            <div className={contactCard}>
-              <img src={contactIcon} alt="Contact" className={contactIconStyle} />
-              <div className={contactInfoText}>
+            <div className="flex items-start space-x-4 bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
+              <img src={contactIcon} alt="Contact" className="w-12 h-12 mt-1" />
+              <div className="space-y-2 text-gray-700">
                 <p><span className="font-semibold">Email:</span> support@shopease.com</p>
                 <p><span className="font-semibold">Phone:</span> +1 234 567 890</p>
                 <p><span className="font-semibold">Address:</span> 123 Main Street, City, Country</p>
@@ -78,17 +66,24 @@ const Contact = () => {
             </div>
 
             {/* FAQ Section */}
-            <div className={faqSection}>
-              <h3 className={faqTitle}>Frequently Asked Questions</h3>
+            <div className="mt-8">
+              <h3 className="text-xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h3>
               <div className="space-y-2">
                 {faqData.map((item, index) => (
-                  <div key={index} className={faqItem}>
-                    <button className={faqButton} onClick={() => toggleFaq(index)}>
-                      <span className="font-medium">{item.question}</span>
-                      <span>{activeFaq === index ? "-" : "+"}</span>
+                  <div key={index} className="border border-gray-200 rounded-md overflow-hidden">
+                    <button 
+                      className="w-full text-left px-4 py-3 flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+                      onClick={() => toggleFaq(index)}
+                    >
+                      <span className="font-medium text-gray-900">{item.question}</span>
+                      <span className="text-gray-600 font-bold text-lg">
+                        {activeFaq === index ? "−" : "+"}
+                      </span>
                     </button>
                     {activeFaq === index && (
-                      <div className={faqAnswer}>{item.answer}</div>
+                      <div className="px-4 py-3 text-gray-700 bg-white border-t border-gray-200">
+                        {item.answer}
+                      </div>
                     )}
                   </div>
                 ))}
@@ -97,50 +92,54 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className={contactForm}>
-            <div>
-              <label className={formLabel}>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={formInput}
-                required
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
+            <Input
+              label="Name"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.name}
+              required
+            />
+
+            <Input
+              label="Email"
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email}
+              required
+            />
 
             <div>
-              <label className={formLabel}>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={formInput}
-                required
-              />
-            </div>
-
-            <div>
-              <label className={formLabel}>Message</label>
+              <label className="block text-gray-700 font-medium mb-2">
+                Message <span className="text-red-500 ml-1">*</span>
+              </label>
               <textarea
                 name="message"
-                value={formData.message}
+                value={values.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 rows="5"
-                className={formInput}
+                className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors duration-200 ${
+                  errors.message ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="Tell us how we can help you..."
                 required
-              ></textarea>
+              />
+              {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
             </div>
 
-            <button type="submit" className={button}>
+            <Button type="submit" className="w-full">
               Send Message
-            </button>
+            </Button>
           </form>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 

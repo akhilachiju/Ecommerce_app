@@ -30,15 +30,15 @@ const Hero = () => {
                 New Arrival —
               </p>
               <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-snug mt-2">
-                Limited Collection For <br />
-                <span>Men’s & Women’s Fashion</span>
+                One Store, <br />
+                <span>Where Quality Meets Variety</span>
               </h1>
             </div>
 
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-              From street wear essentials to elegant looks — explore our new
-              season collection crafted for everyone. Stay stylish, confident,
-              and comfortable all day long.
+              Discover a diverse range of products, explore clothing, tech,
+              beauty, and home essentials — all curated to elevate your everyday
+              life. Style, comfort, and innovation meet here.
             </p>
 
             <div>

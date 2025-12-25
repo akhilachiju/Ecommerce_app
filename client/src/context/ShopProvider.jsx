@@ -6,6 +6,7 @@ export const ShopProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   // Fetch products
   useEffect(() => {
@@ -25,7 +26,6 @@ export const ShopProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -45,12 +45,12 @@ export const ShopProvider = ({ children }) => {
     });
   };
 
-  // ✅ Remove from cart
+  // Remove from cart
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
-  // ✅ Adjust quantity
+  // Adjust quantity
   const updateQuantity = (productId, amount) => {
     setCart((prevCart) =>
       prevCart
@@ -69,6 +69,18 @@ export const ShopProvider = ({ children }) => {
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
     .toFixed(2);
 
+  // Wishlist add/remove toggle
+  const addToWishlist = (productId) => {
+    setWishlist((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  // Wishlist count
+  const wishlistCount = wishlist.length;
+
   return (
     <ShopContext.Provider
       value={{
@@ -81,6 +93,9 @@ export const ShopProvider = ({ children }) => {
         updateQuantity,
         cartCount,
         cartTotal,
+        wishlist,
+        addToWishlist,
+        wishlistCount, 
       }}
     >
       {children}
