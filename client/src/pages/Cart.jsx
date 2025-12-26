@@ -32,13 +32,15 @@ const Cart = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Your Cart</h1>
 
         {cart.length === 0 ? (
-          <EmptyState
-            title="Your cart is empty"
-            description="Looks like you haven't added anything to your cart yet"
-            actionText="Go to Shop"
-            onAction={() => navigate('/shop')}
-            icon={HiOutlineShoppingBag}
-          />
+          <div className="text-center py-20">
+            <p className="text-lg text-gray-500 mb-4">Your cart is empty.</p>
+            <Link
+              to="/shop"
+              className="bg-black text-white font-medium px-4 py-2 rounded-full hover:bg-green-600 transition-colors duration-300"
+            >
+              Go to Shop
+            </Link>
+          </div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-10">
             {/* Cart Items */}
@@ -49,26 +51,8 @@ const Cart = () => {
                 return (
                   <div
                     key={item.id}
-                    className="relative flex items-center justify-between bg-white rounded-xl shadow-sm p-4 hover:shadow-md transition"
+                    className="relative flex items-center justify-between bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6"
                   >
-                    {/* Wishlist Heart */}
-                    <button
-                      onClick={() => addToWishlist(item.id)}
-                      className="absolute top-3 right-3"
-                      title={
-                        isWishlisted
-                          ? "Remove from Wishlist"
-                          : "Add to Wishlist"
-                      }
-                    >
-                      <RiHeartFill
-                        className={`w-6 h-6 transition-colors duration-200 ${
-                          isWishlisted
-                            ? "text-green-600"
-                            : "text-gray-300 hover:text-green-500"
-                        }`}
-                      />
-                    </button>
 
                     {/* Image & Details */}
                     <div className="flex items-center space-x-4">
@@ -107,13 +91,37 @@ const Cart = () => {
                         </button>
                       </div>
 
+                      {/* Wishlist Heart */}
+                      <button
+                        onClick={() => addToWishlist(item.id)}
+                        className={`
+                          flex items-center justify-center 
+                          w-8 h-8 rounded-full shadow-md hover:shadow-lg 
+                          transition-all duration-300
+                          ${isWishlisted ? 'bg-green-50' : 'bg-white'}
+                        `}
+                        title={
+                          isWishlisted
+                            ? "Remove from Wishlist"
+                            : "Add to Wishlist"
+                        }
+                      >
+                        <RiHeartFill
+                          className={`w-5 h-5 transition-colors duration-200 ${
+                            isWishlisted
+                              ? "text-green-600"
+                              : "text-gray-300 hover:text-green-500"
+                          }`}
+                        />
+                      </button>
+
                       {/* Remove button */}
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-red-500 hover:text-red-700"
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-black hover:bg-red-500 shadow-md hover:shadow-lg transition-all duration-300"
                         title="Remove item"
                       >
-                        <HiTrash className="w-5 h-5" />
+                        <HiTrash className="w-5 h-5 text-white" />
                       </button>
                     </div>
                   </div>
@@ -122,7 +130,7 @@ const Cart = () => {
             </div>
 
             {/* Summary Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 h-fit">
+            <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 h-fit">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">
                 Order Summary
               </h2>

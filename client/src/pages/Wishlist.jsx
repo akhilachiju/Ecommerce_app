@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
-import { section, container, button } from "../styles/ui.config";
+import { Section, Container } from "../components/ui";
 import { HiArrowLeft, HiOutlineShoppingBag } from "react-icons/hi";
 import { RiHeartFill } from "react-icons/ri";
 
@@ -39,8 +39,8 @@ const Wishlist = () => {
   };
 
   return (
-    <section className={`${section} min-h-screen bg-gray-50`}>
-      <div className={`${container} py-10`}>
+    <Section background="gray" className="min-h-screen">
+      <Container className="py-10">
         {/* Back button */}
         <button
           onClick={() => navigate(-1)}
@@ -57,7 +57,7 @@ const Wishlist = () => {
             <p className="text-lg text-gray-500 mb-4">Your wishlist is empty.</p>
             <Link
               to="/shop"
-              className={`${button} bg-black hover:bg-green-600 text-white`}
+              className="bg-black text-white font-medium px-4 py-2 rounded-full hover:bg-green-600 transition-colors duration-300"
             >
               Go to Shop
             </Link>
@@ -69,7 +69,7 @@ const Wishlist = () => {
               {wishlistItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`flex items-center justify-between bg-white rounded-xl shadow-sm p-4 transition hover:shadow-md ${
+                  className={`flex items-center justify-between bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 ${
                     item.stock === 0 ? "opacity-50" : ""
                   }`}
                 >
@@ -119,7 +119,7 @@ const Wishlist = () => {
             </div>
 
             {/* Summary Section */}
-            <div className="bg-white rounded-xl shadow-md p-6 h-fit">
+            <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 h-fit">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Wishlist Summary</h2>
 
               <div className="space-y-3 border-b border-gray-200 pb-4">
@@ -144,7 +144,7 @@ const Wishlist = () => {
               {/* Actions */}
               <div className="flex flex-col gap-3 mt-6">
                 <button
-                  className={`${button} bg-black hover:bg-green-600 text-white`}
+                  className="bg-black text-white font-medium px-4 py-2 rounded-full hover:bg-green-600 transition-colors duration-300"
                   onClick={handleAddAllToCart}
                 >
                   Add All to Cart
@@ -159,8 +159,8 @@ const Wishlist = () => {
             </div>
           </div>
         )}
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 
