@@ -32,10 +32,38 @@ const BestSeller = () => {
       .slice(0, 4);
 
     const layoutPattern = [
-      { tagType: "vertical", height: "420px" },
-      { tagType: "horizontal", height: "340px" },
-      { tagType: "horizontal", height: "340px" },
-      { tagType: "vertical", height: "420px" },
+      { 
+        tagType: "vertical", 
+        height: {
+          mobile: "200px",
+          tablet: "300px", 
+          desktop: "420px"
+        }
+      },
+      { 
+        tagType: "horizontal", 
+        height: {
+          mobile: "180px",
+          tablet: "250px",
+          desktop: "340px"
+        }
+      },
+      { 
+        tagType: "horizontal", 
+        height: {
+          mobile: "180px",
+          tablet: "250px",
+          desktop: "340px"
+        }
+      },
+      { 
+        tagType: "vertical", 
+        height: {
+          mobile: "200px",
+          tablet: "300px",
+          desktop: "420px"
+        }
+      },
     ];
 
     // Map categories to display objects
@@ -72,16 +100,21 @@ const BestSeller = () => {
       <Container>
         <SectionHeader title="Best For Your Categories" />
 
+        <div className="mb-8"></div>
+
         {/* CATEGORY GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {categories.map((cat, index) => (
             <div key={index} className={`${categoryCard} relative`}>
               {/* Product Image Link */}
               <Link to={`/product/${cat.productId}`}>
                 <div
-                  className={categoryImage}
+                  className={`${categoryImage} ${
+                    cat.tagType === "vertical" 
+                      ? "h-[200px] sm:h-[300px] md:h-[420px]" 
+                      : "h-[180px] sm:h-[250px] md:h-[340px]"
+                  }`}
                   style={{
-                    height: cat.height,
                     overflow: "hidden",
                     borderRadius: "1rem",
                     position: "relative",
@@ -97,14 +130,14 @@ const BestSeller = () => {
                   {cat.tagType === "vertical" ? (
                     <div className={verticalTag}>
                       <span
-                        className={`${categoryTagText} writing-mode-vertical rotate-180`}
+                        className={`${categoryTagText} writing-mode-vertical rotate-180 text-sm md:text-lg`}
                       >
                         {cat.name}
                       </span>
                     </div>
                   ) : (
                     <div className={horizontalTag}>
-                      <span className={categoryTagText}>{cat.name}</span>
+                      <span className={`${categoryTagText} text-sm md:text-lg`}>{cat.name}</span>
                     </div>
                   )}
                 </div>

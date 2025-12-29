@@ -8,16 +8,36 @@ export const ShopProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  // Fetch products
+  // Fetch products with caching
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://dummyjson.com/products");
+        
+        // Check if products are cached in localStorage
+        const cachedProducts = localStorage.getItem('shopease_all_products');
+        const cacheTimestamp = localStorage.getItem('shopease_all_products_timestamp');
+        const now = Date.now();
+        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+        
+        // Use cached data if it exists and is not expired
+        if (cachedProducts && cacheTimestamp && (now - parseInt(cacheTimestamp)) < cacheExpiry) {
+          setProducts(JSON.parse(cachedProducts));
+          setLoading(false);
+          return;
+        }
+
+        // Fetch from API if no cache or expired
+        const response = await fetch("https://dummyjson.com/products?limit=100");
         if (!response.ok) throw new Error("Failed to fetch products");
 
         const data = await response.json();
         setProducts(data.products);
+        
+        // Cache the products
+        localStorage.setItem('shopease_all_products', JSON.stringify(data.products));
+        localStorage.setItem('shopease_all_products_timestamp', now.toString());
+        
         setError(null);
       } catch (err) {
         setError(err.message || "Something went wrong while fetching products");

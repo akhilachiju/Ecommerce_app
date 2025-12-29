@@ -5,13 +5,10 @@ import {
   Section,
   Container,
   Button,
-  IconWithBadge,
-  EmptyState,
 } from "../../../shared/components";
 import {
   HiArrowLeft,
   HiOutlineTrash,
-  HiOutlineShoppingBag,
 } from "react-icons/hi";
 import { RiHeartFill } from "react-icons/ri";
 
@@ -28,7 +25,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   return (
-    <Section background="gray" className="min-h-screen">
+    <Section background="white" className="min-h-screen">
       <Container className="py-10">
         {/* Back button */}
         <button

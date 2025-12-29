@@ -42,7 +42,7 @@ const Wishlist = () => {
   };
 
   return (
-    <Section background="gray" className="min-h-screen">
+    <Section background="white" className="min-h-screen">
       <Container className="py-10">
         {/* Back button */}
         <button

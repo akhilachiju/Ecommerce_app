@@ -78,14 +78,22 @@ const Hero = () => {
         className={`${container} py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6`}
       >
         <div className={featureCard}>
-          <LazyImage className={featureIcon} src={shippingIcon} alt="Shipping Icon" />
+          <LazyImage
+            className={featureIcon}
+            src={shippingIcon}
+            alt="Shipping Icon"
+          />
           <span className={featureTitle}>FREE SHIPPING</span>
           <span className={featureDesc}>
             Free worldwide shipping on all orders.
           </span>
         </div>
         <div className={featureCard}>
-          <LazyImage className={featureIcon} src={returnIcon} alt="Return Icon" />
+          <LazyImage
+            className={featureIcon}
+            src={returnIcon}
+            alt="Return Icon"
+          />
           <span className={featureTitle}>30 DAYS RETURN</span>
           <span className={featureDesc}>
             No question return and easy refund in 14 days.
@@ -99,23 +107,15 @@ const Hero = () => {
           </span>
         </div>
         <div className={featureCard}>
-          <LazyImage className={featureIcon} src={contactIcon} alt="Contact Icon" />
+          <LazyImage
+            className={featureIcon}
+            src={contactIcon}
+            alt="Contact Icon"
+          />
           <span className={featureTitle}>CONTACT US!</span>
           <span className={featureDesc}>
             Keep in touch via email and support system.
           </span>
-        </div>
-      </section>
-      {/* OUR STORY SECTION */}
-      <section className={`${container} py-10`}>
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h2>
-          <p className="text-gray-600 text-center max-w-3xl mx-auto">
-            ShopEase was founded in 2022 with the idea that shopping online
-            should be simple, fun, and reliable. Our team is dedicated to
-            sourcing the best products, offering excellent customer service, and
-            creating a platform where every shopper feels valued and inspired.
-          </p>
         </div>
       </section>
     </>
