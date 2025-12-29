@@ -1,11 +1,13 @@
 import React from "react";
-import Hero from "../components/Hero";
-import BestSeller from "../components/BestSeller";
+import Hero from "../shared/components/Hero";
+import BestSeller from "../features/products/components/BestSeller";
+import About from "../shared/components/About";
 
 const Home = () => {
   return (
     <div>
       <Hero />
+      <About />
       <BestSeller />
     </div>
   );  

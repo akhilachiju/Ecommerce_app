@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ShopContext } from '../../context/ShopContext';
+import { ShopContext } from '../../cart/ShopContext';
 import { RiHeartFill } from 'react-icons/ri';
 import { HiOutlineShoppingBag, HiOutlineShare } from 'react-icons/hi';
-import { calculateDiscountedPrice, getStockStatus, generateStarRating, shareProduct } from '../../utils';
+import { calculateDiscountedPrice, getStockStatus, generateStarRating, shareProduct } from '../../../shared/utils';
 
 const ProductCard = ({ 
   product, 
@@ -44,14 +44,14 @@ const ProductCard = ({
           onClick={() => addToWishlist(product.id)}
           className={`
             absolute top-3 right-3 z-10 flex items-center justify-center 
-            w-10 h-10 rounded-full shadow-md hover:shadow-lg 
+            w-8 h-8 rounded-full shadow-md hover:shadow-lg 
             transition-all duration-300
             ${isWishlisted ? 'bg-green-50' : 'bg-white'}
           `}
           title={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
         >
           <RiHeartFill className={`
-            w-6 h-6 transition-colors duration-200
+            w-5 h-5 transition-colors duration-200
             ${isWishlisted ? 'text-green-600' : 'text-gray-300 hover:text-green-500'}
           `} />
         </button>

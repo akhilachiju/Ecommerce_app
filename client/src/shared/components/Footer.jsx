@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
-import { colors, cursors, container } from "../styles/ui.config";
+import logo from "../../assets/logo.svg";
+import { colors, cursors, container } from "../../styles/ui.config";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {

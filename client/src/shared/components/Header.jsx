@@ -2,7 +2,7 @@ import React from "react";
 import { TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { container } from "../styles/ui.config";
+import { container } from "../../styles/ui.config";
 
 const Header = () => {
   return (

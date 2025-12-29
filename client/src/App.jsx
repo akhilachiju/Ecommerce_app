@@ -1,44 +1,24 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Notification from "./pages/Notification";
-import Wishlist from "./pages/Wishlist";
-import Cart from "./pages/Cart";
-import Orders from "./pages/Orders";
-import PlaceOrder from "./pages/PlaceOrder";
-import Product from "./pages/ProductDetails";
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
+import AppProviders from "./app/AppProviders";
+import AppRoutes from "./app/AppRoutes";
+import Navbar from "./shared/components/Navbar";
+import Header from "./shared/components/Header";
+import Footer from "./shared/components/Footer";
+import ScrollToTop from "./shared/components/ScrollToTop";
 
 const App = () => {
   return (
-    <div>
-      <ScrollToTop />
-      <Header />
-      <Navbar />
-      <div className="">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/place-order" element={<PlaceOrder />} />
-          <Route path="/product/:id" element={<Product />} />
-        </Routes>
+    <AppProviders>
+      <div>
+        <ScrollToTop />
+        <Header />
+        <Navbar />
+        <div className="routes">
+          <AppRoutes />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </AppProviders>
   );
 };
 

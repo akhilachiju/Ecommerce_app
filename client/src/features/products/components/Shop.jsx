@@ -1,16 +1,16 @@
 import React, { useContext, useState, useMemo } from "react";
-import { ShopContext } from "../context/ShopContext";
-import { 
-  Section, 
-  Container, 
-  SectionHeader, 
-  Input, 
-  Dropdown, 
-  ProductCard, 
-  LoadingSpinner, 
-  ErrorMessage, 
-  EmptyState 
-} from "../components/ui";
+import { ShopContext } from "../../cart/ShopContext";
+import {
+  Section,
+  Container,
+  SectionHeader,
+  Input,
+  Dropdown,
+  LoadingSpinner,
+  ErrorMessage,
+  EmptyState,
+} from "../../../shared/components";
+import ProductCard from "./ProductCard";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
 const Shop = () => {
@@ -28,8 +28,9 @@ const Shop = () => {
   // Filter products
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesSearch =
-        product.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = product.title
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
       const matchesCategory =
         selectedCategory === "All" || product.category === selectedCategory;
       return matchesSearch && matchesCategory;

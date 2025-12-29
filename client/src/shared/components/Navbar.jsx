@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import LazyImage from "./LazyImage";
+import logo from "../../assets/logo.svg";
 import { RiNotification2Line, RiHeartLine } from "react-icons/ri";
 import {
   HiOutlineShoppingBag,
   HiOutlineMenuAlt3,
   HiX,
 } from "react-icons/hi";
-import { ShopContext } from "../context/ShopContext";
-import { IconWithBadge } from "./ui";
+import { ShopContext } from "../../features/cart/ShopContext";
+import { IconWithBadge } from ".";
 import {
   navbarContainer,
   navLinks,
@@ -17,7 +18,7 @@ import {
   colors,
   cursors,
   mobileMenu,
-} from "../styles/ui.config";
+} from "../../styles/ui.config";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +27,6 @@ const Navbar = () => {
   const links = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
-    { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className={navbarContainer}>
         {/* LEFT: Logo */}
         <NavLink to="/" className="flex items-center">
-          <img src={logo} alt="ShopEase logo" className={logoImage} />
+          <LazyImage src={logo} alt="ShopEase logo" className={logoImage} />
           <span className="text-2xl md:text-3xl font-bold text-black ml-2">
             Ease
           </span>
@@ -44,19 +44,33 @@ const Navbar = () => {
         {/* MIDDLE: Links (Desktop) */}
         <div className={navLinks}>
           {links.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `relative font-medium px-1 pb-1 transition-all duration-300 ${cursors.pointer} ${
-                  isActive
-                    ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
-                    : `${colors.primary}`
-                }`
-              }
-            >
-              {link.name}
-            </NavLink>
+            link.isScroll ? (
+              <a
+                key={link.name}
+                href={link.path}
+                className={`relative font-medium px-1 pb-1 transition-all duration-300 ${cursors.pointer} ${colors.primary}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `relative font-medium px-1 pb-1 transition-all duration-300 ${cursors.pointer} ${
+                    isActive
+                      ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
+                      : `${colors.primary}`
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            )
           ))}
         </div>
 
@@ -112,20 +126,35 @@ const Navbar = () => {
       >
         <div className="flex flex-col items-center space-y-4 py-4">
           {links.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `relative font-medium transition-all duration-300 ${cursors.pointer} ${
-                  isActive
-                    ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
-                    : `${colors.primary}`
-                }`
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.name}
-            </NavLink>
+            link.isScroll ? (
+              <a
+                key={link.name}
+                href={link.path}
+                className={`relative font-medium transition-all duration-300 ${cursors.pointer} ${colors.primary}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `relative font-medium transition-all duration-300 ${cursors.pointer} ${
+                    isActive
+                      ? "text-green-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-green-500 after:rounded-full"
+                      : `${colors.primary}`
+                  }`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </NavLink>
+            )
           ))}
         </div>
       </div>

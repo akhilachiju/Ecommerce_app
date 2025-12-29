@@ -1,7 +1,8 @@
 import React, { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../context/ShopContext";
-import { Section, Container, SectionHeader, Button, LoadingSpinner, EmptyState } from "./ui";
+import { ShopContext } from "../../cart/ShopContext";
+import { Section, Container, SectionHeader, Button, LoadingSpinner, EmptyState } from "../../../shared/components";
+import ProductCard from "./ProductCard";
 import {
   categoryCard,
   categoryImage,
@@ -9,7 +10,7 @@ import {
   verticalTag,
   horizontalTag,
   categoryTagText,
-} from "../styles/ui.config";
+} from "../../../styles/ui.config";
 
 const BestSeller = () => {
   const { products, loading } = useContext(ShopContext);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LazyImage from "./LazyImage";
 import {
   button,
   featureCard,
@@ -7,13 +8,13 @@ import {
   featureTitle,
   featureDesc,
   container,
-} from "../styles/ui.config";
+} from "../../styles/ui.config";
 
-import shippingIcon from "../assets/shipping.png";
-import returnIcon from "../assets/return.png";
-import giftIcon from "../assets/gift.png";
-import contactIcon from "../assets/contact.png";
-import heroImage from "../assets/hero_men.png";
+import shippingIcon from "../../assets/shipping.png";
+import returnIcon from "../../assets/return.png";
+import giftIcon from "../../assets/gift.png";
+import contactIcon from "../../assets/contact.png";
+import heroImage from "../../assets/hero_men.png";
 
 const Hero = () => {
   return (
@@ -63,7 +64,7 @@ const Hero = () => {
             </div>
 
             {/* Hero Image */}
-            <img
+            <LazyImage
               src={heroImage}
               alt="Men's Fashion Hero"
               className="relative w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] object-contain drop-shadow-lg z-10"
@@ -77,32 +78,44 @@ const Hero = () => {
         className={`${container} py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6`}
       >
         <div className={featureCard}>
-          <img className={featureIcon} src={shippingIcon} alt="Shipping Icon" />
+          <LazyImage className={featureIcon} src={shippingIcon} alt="Shipping Icon" />
           <span className={featureTitle}>FREE SHIPPING</span>
           <span className={featureDesc}>
             Free worldwide shipping on all orders.
           </span>
         </div>
         <div className={featureCard}>
-          <img className={featureIcon} src={returnIcon} alt="Return Icon" />
+          <LazyImage className={featureIcon} src={returnIcon} alt="Return Icon" />
           <span className={featureTitle}>30 DAYS RETURN</span>
           <span className={featureDesc}>
             No question return and easy refund in 14 days.
           </span>
         </div>
         <div className={featureCard}>
-          <img className={featureIcon} src={giftIcon} alt="Gift Icon" />
+          <LazyImage className={featureIcon} src={giftIcon} alt="Gift Icon" />
           <span className={featureTitle}>GIFT CARDS</span>
           <span className={featureDesc}>
             Buy gift cards and use coupon codes easily.
           </span>
         </div>
         <div className={featureCard}>
-          <img className={featureIcon} src={contactIcon} alt="Contact Icon" />
+          <LazyImage className={featureIcon} src={contactIcon} alt="Contact Icon" />
           <span className={featureTitle}>CONTACT US!</span>
           <span className={featureDesc}>
             Keep in touch via email and support system.
           </span>
+        </div>
+      </section>
+      {/* OUR STORY SECTION */}
+      <section className={`${container} py-10`}>
+        <div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h2>
+          <p className="text-gray-600 text-center max-w-3xl mx-auto">
+            ShopEase was founded in 2022 with the idea that shopping online
+            should be simple, fun, and reliable. Our team is dedicated to
+            sourcing the best products, offering excellent customer service, and
+            creating a platform where every shopper feels valued and inspired.
+          </p>
         </div>
       </section>
     </>

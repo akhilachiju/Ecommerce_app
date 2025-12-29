@@ -8,4 +8,19 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  server: {
+    hmr: {
+      overlay: false
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom']
+        }
+      }
+    }
+  }
 })
