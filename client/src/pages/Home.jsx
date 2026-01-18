@@ -1,7 +1,5 @@
 import React from "react";
-import Hero from "../shared/components/Hero";
-import BestSeller from "../features/products/components/BestSeller";
-import About from "../shared/components/About";
+import { Hero, BestSeller, About } from "../components";
 
 const Home = () => {
   return (

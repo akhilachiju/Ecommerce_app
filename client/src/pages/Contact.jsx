@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Section, Container, SectionHeader, Input, Button } from "../shared/components";
-import { useForm, useLocalStorage } from "../shared/hooks";
+import { Section, Container, SectionHeader, Input, Button } from "../components";
+import { useForm, useLocalStorage } from "../hooks";
 import contactIcon from "../assets/contact.png";
 
 const faqData = [
