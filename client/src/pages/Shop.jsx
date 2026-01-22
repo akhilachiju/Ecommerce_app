@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo } from "react";
-import { ShopContext } from "../../context/ShopContext";
+import { ShopContext } from "../context/ShopContext";
 import {
   Section,
   Container,
@@ -7,9 +7,10 @@ import {
   LoadingSpinner,
   ErrorMessage,
   EmptyState,
-} from "../ui/StateComponents";
-import { Input, Dropdown } from "../ui";
-import ProductCard from "./ProductCard";
+  Input,
+  Dropdown
+} from "../components";
+import { ProductCard } from "../components";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
 const Shop = () => {

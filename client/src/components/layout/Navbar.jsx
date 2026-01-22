@@ -77,7 +77,7 @@ const Navbar = () => {
         {/* RIGHT: Icons */}
         <div className={iconGroup}>
           {/* Notifications */}
-          <NavLink to="/notifications">
+          <NavLink to="/notification">
             <IconWithBadge 
               icon={RiNotification2Line}
               showBadge={false}

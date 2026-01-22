@@ -18,7 +18,7 @@ export const ShopProvider = ({ children }) => {
         const cachedProducts = localStorage.getItem('shopease_all_products');
         const cacheTimestamp = localStorage.getItem('shopease_all_products_timestamp');
         const now = Date.now();
-        const cacheExpiry = 5 * 60 * 1000; // 5 minutes
+        const cacheExpiry = import.meta.env.VITE_CACHE_EXPIRY_MS || 300000; // Default 5 minutes
         
         // Use cached data if it exists and is not expired
         if (cachedProducts && cacheTimestamp && (now - parseInt(cacheTimestamp)) < cacheExpiry) {
@@ -28,7 +28,8 @@ export const ShopProvider = ({ children }) => {
         }
 
         // Fetch from API if no cache or expired
-        const response = await fetch("https://dummyjson.com/products?limit=1000");
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'https://dummyjson.com'}/products?limit=1000`;
+        const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("Failed to fetch products");
 
         const data = await response.json();

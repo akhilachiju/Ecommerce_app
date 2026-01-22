@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ShopContext } from "../../context/ShopContext";
-import { container, section } from "../../styles/ui.config";
+import { ShopContext } from "../context/ShopContext";
+import { container, section } from "../styles/ui.config";
 import {
   HiArrowLeft,
   HiOutlineShare,

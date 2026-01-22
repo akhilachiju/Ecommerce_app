@@ -1,5 +1,4 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import { Header, Navbar, Footer } from './';
 
 const Layout = ({ children }) => {
@@ -8,7 +7,7 @@ const Layout = ({ children }) => {
       <Header />
       <Navbar />
       <main className="flex-1">
-        {children || <Outlet />}
+        {children}
       </main>
       <Footer />
     </div>

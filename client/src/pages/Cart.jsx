@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShopContext } from "../../context/ShopContext";
+import { ShopContext } from "../context/ShopContext";
 import {
   Section,
   Container,
-} from "../ui/StateComponents";
-import { Button } from "../ui";
+  Button
+} from "../components";
 import {
   HiArrowLeft,
   HiOutlineTrash,
+  HiOutlineShoppingBag
 } from "react-icons/hi";
 import { RiHeartFill } from "react-icons/ri";
 
@@ -40,6 +41,7 @@ const Cart = () => {
 
         {cart.length === 0 ? (
           <div className="text-center py-20">
+            <HiOutlineShoppingBag className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <p className="text-lg text-gray-500 mb-4">Your cart is empty.</p>
             <Link
               to="/shop"

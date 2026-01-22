@@ -4,3 +4,8 @@ export { default as Notification } from './Notification';
 export { default as Login } from './Login';
 export { default as Orders } from './Orders';
 export { default as PlaceOrder } from './PlaceOrder';
+export { default as Shop } from './Shop';
+export { default as ProductDetails } from './ProductDetails';
+export { default as Wishlist } from './Wishlist';
+export { default as Cart } from './Cart';
+export { default as Privacy } from './Privacy';

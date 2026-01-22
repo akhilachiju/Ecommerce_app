@@ -1,7 +1,18 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Login, Home, Contact, Notification, Orders, PlaceOrder } from "../pages";
-import { Shop, ProductDetails, Wishlist, Cart } from "../components";
+import { 
+  Login, 
+  Home, 
+  Contact, 
+  Notification, 
+  Orders, 
+  PlaceOrder,
+  Shop,
+  ProductDetails,
+  Wishlist,
+  Cart,
+  Privacy
+} from "../pages";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/orders" element={<Orders />} />
       <Route path="/place-order" element={<PlaceOrder />} />
       <Route path="/product/:id" element={<ProductDetails />} />
+      <Route path="/privacy" element={<Privacy />} />
     </Routes>
   );
 };

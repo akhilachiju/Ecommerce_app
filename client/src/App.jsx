@@ -1,19 +1,17 @@
 import React from "react";
 import { AppProviders, AppRoutes } from "./routes";
-import { Navbar, Header, Footer, ScrollToTop } from "./components";
+import { Layout, ScrollToTop } from "./components";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <AppProviders>
-      <div>
-        <ScrollToTop />
-        <Header />
-        <Navbar />
-        <div className="routes">
-          <AppRoutes />
-        </div>
-        <Footer />
-      </div>
+      <ScrollToTop />
+      <Layout>
+        <AppRoutes />
+      </Layout>
+      <ToastContainer />
     </AppProviders>
   );
 };

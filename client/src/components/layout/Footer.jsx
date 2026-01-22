@@ -30,27 +30,13 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/shop/men"
-                className={`${colors.primary} ${cursors.pointer}`}
-              >
-                Men
+              <Link to="/cart" className={`${colors.primary} ${cursors.pointer}`}>
+                Shopping Cart
               </Link>
             </li>
             <li>
-              <Link
-                to="/shop/women"
-                className={`${colors.primary} ${cursors.pointer}`}
-              >
-                Women
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/shop/accessories"
-                className={`${colors.primary} ${cursors.pointer}`}
-              >
-                Accessories
+              <Link to="/wishlist" className={`${colors.primary} ${cursors.pointer}`}>
+                Wishlist
               </Link>
             </li>
           </ul>
@@ -61,8 +47,8 @@ const Footer = () => {
           <h3 className="text-lg font-semibold text-black mb-4">Company</h3>
           <ul className="space-y-2">
             <li>
-              <Link to="/about" className={`${colors.primary} ${cursors.pointer}`}>
-                About Us
+              <Link to="/" className={`${colors.primary} ${cursors.pointer}`}>
+                Home
               </Link>
             </li>
             <li>
@@ -71,11 +57,6 @@ const Footer = () => {
                 className={`${colors.primary} ${cursors.pointer}`}
               >
                 Contact
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className={`${colors.primary} ${cursors.pointer}`}>
-                FAQ
               </Link>
             </li>
             <li>

@@ -8,6 +8,9 @@ export const formatPrice = (price) => {
   return `$${parseFloat(price).toFixed(2)}`;
 };
 
+// Toast utilities
+export * from './toast';
+
 // Product utilities
 export const getStockStatus = (stock) => {
   if (stock === 0) return { status: 'out-of-stock', message: 'Out of Stock', color: 'text-red-500' };

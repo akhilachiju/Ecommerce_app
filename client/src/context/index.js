@@ -1,2 +1,2 @@
 export { ShopContext } from './ShopContext';
-export { ShopProvider } from './cartContext';
+export { ShopProvider } from './shopContext';
