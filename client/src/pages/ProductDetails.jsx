@@ -12,11 +12,16 @@ import logger from "../utils/logger";
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, addToCart, updateQuantity, cart, wishlist, addToWishlist } =
+  const { products, addToCart, updateQuantity, cart, wishlist, addToWishlist, loading } =
     useContext(ShopContext);
 
   const [activeTab, setActiveTab] = useState("specs");
   const [mainImage, setMainImage] = useState(null);
+
+  // Handle loading state and undefined products
+  if (loading || !products) {
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  }
 
   const product = products.find((p) => p.id === parseInt(id));
   const cartItem = cart.find((item) => item.id === product?.id);
@@ -94,7 +99,7 @@ const ProductDetails = () => {
             productId={product.id}
             handleShare={handleShare}
             addToCart={addToCart}
-            product={product}
+            product={{...product, cartItem, updateQuantity}}
             stock={stock}
           />
 
@@ -110,13 +115,6 @@ const ProductDetails = () => {
               rating={rating}
               stock={stock}
               meta={meta}
-            />
-
-            {/* Quantity Adjuster */}
-            <QuantityAdjuster
-              cartItem={cartItem}
-              updateQuantity={updateQuantity}
-              productId={product.id}
             />
           </div>
         </div>

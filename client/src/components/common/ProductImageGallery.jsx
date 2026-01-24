@@ -65,28 +65,52 @@ const ProductImageGallery = ({
           />
         </button>
 
-        {/* Share */}
-        <button
-          onClick={handleShare}
-          className="absolute bottom-3 right-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-green-600 hover:text-white text-gray-700 transition-all"
-          title="Share Product"
-        >
-          <HiOutlineShare className="w-5 h-5" />
-        </button>
+        {/* Horizontal button row */}
+        <div className="absolute bottom-3 right-3 flex items-center gap-2">
+          {/* Quantity Adjuster (when item is in cart) - first */}
+          {product.cartItem && (
+            <div className="flex items-center bg-gray-100 rounded-xl px-3 py-1">
+              <button
+                onClick={() => product.updateQuantity(productId, -1)}
+                className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg font-bold"
+              >
+                −
+              </button>
+              <span className="mx-3 text-gray-800 font-semibold">
+                {product.cartItem.quantity}
+              </span>
+              <button
+                onClick={() => product.updateQuantity(productId, 1)}
+                className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg font-bold"
+              >
+                +
+              </button>
+            </div>
+          )}
 
-        {/* Add to Cart */}
-        <button
-          onClick={() => addToCart(product)}
-          disabled={stock === 0}
-          className={`absolute bottom-3 right-3 flex items-center justify-center w-10 h-10 rounded-full text-white transition ${
-            stock === 0
-              ? "bg-gray-200 cursor-not-allowed"
-              : "bg-black hover:bg-green-600"
-          }`}
-          title={stock === 0 ? "Out of Stock" : "Add to Cart"}
-        >
-          <HiOutlineShoppingBag className="w-5 h-5" />
-        </button>
+          {/* Share - second */}
+          <button
+            onClick={handleShare}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-green-600 hover:text-white text-gray-700 transition-all"
+            title="Share Product"
+          >
+            <HiOutlineShare className="w-5 h-5" />
+          </button>
+
+          {/* Add to Cart - third */}
+          <button
+            onClick={() => addToCart(product)}
+            disabled={stock === 0}
+            className={`flex items-center justify-center w-10 h-10 rounded-full text-white transition ${
+              stock === 0
+                ? "bg-gray-200 cursor-not-allowed"
+                : "bg-black hover:bg-green-600"
+            }`}
+            title={stock === 0 ? "Out of Stock" : "Add to Cart"}
+          >
+            <HiOutlineShoppingBag className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </div>
   );
