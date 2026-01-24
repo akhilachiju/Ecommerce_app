@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo } from "react";
-import { ShopContext } from "../context/ShopContext";
+import { ShopContext } from "../context/context";
 import {
   Section,
   Container,

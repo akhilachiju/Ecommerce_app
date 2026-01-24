@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShopContext } from "../context/ShopContext";
+import { ShopContext } from "../context/context";
 import { Section, Container } from "../components";
 import { HiArrowLeft, HiOutlineShoppingBag } from "react-icons/hi";
 import { RiHeartFill } from "react-icons/ri";

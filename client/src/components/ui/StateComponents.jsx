@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Section = ({ children, className = '' }) => (
   <section className={`py-8 ${className}`}>{children}</section>

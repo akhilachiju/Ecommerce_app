@@ -1,3 +1,5 @@
+import logger from './logger';
+
 // Price calculation utilities
 export const calculateDiscountedPrice = (originalPrice, discountPercentage = 0) => {
   const discount = (originalPrice * discountPercentage) / 100;
@@ -38,7 +40,7 @@ export const shareProduct = async (product) => {
       await navigator.share(shareData);
       return { success: true };
     } catch (err) {
-      console.error('Share failed:', err.message);
+      logger.error('Share failed:', err.message);
       return { success: false, error: err.message };
     }
   } else {
@@ -96,7 +98,7 @@ export const getFromStorage = (key, defaultValue = null) => {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : defaultValue;
   } catch (error) {
-    console.error(`Error reading from localStorage: ${error}`);
+    logger.error(`Error reading from localStorage: ${error}`);
     return defaultValue;
   }
 };
@@ -106,7 +108,7 @@ export const setToStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
-    console.error(`Error writing to localStorage: ${error}`);
+    logger.error(`Error writing to localStorage: ${error}`);
     return false;
   }
 };
@@ -116,7 +118,7 @@ export const removeFromStorage = (key) => {
     localStorage.removeItem(key);
     return true;
   } catch (error) {
-    console.error(`Error removing from localStorage: ${error}`);
+    logger.error(`Error removing from localStorage: ${error}`);
     return false;
   }
 };

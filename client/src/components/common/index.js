@@ -8,3 +8,8 @@ export { default as ProductCard } from './ProductCard';
 export { default as BestSeller } from './BestSeller';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as SuspenseWrapper } from './SuspenseWrapper';
+export { default as CartItem } from './CartItem';
+export { default as ProductInfo } from './ProductInfo';
+export { default as ProductImageGallery } from './ProductImageGallery';
+export { default as ProductTabs } from './ProductTabs';
+export { default as QuantityAdjuster } from './QuantityAdjuster';

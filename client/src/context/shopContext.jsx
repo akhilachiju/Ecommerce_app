@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ShopContext } from "./ShopContext";
+import { ShopContext } from "./context";
 
 export const ShopProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -10,6 +10,8 @@ export const ShopProvider = ({ children }) => {
 
   // Fetch products with caching
   useEffect(() => {
+    const controller = new AbortController();
+    
     const fetchProducts = async () => {
       try {
         setLoading(true);
@@ -28,8 +30,8 @@ export const ShopProvider = ({ children }) => {
         }
 
         // Fetch from API if no cache or expired
-        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'https://dummyjson.com'}/products?limit=1000`;
-        const response = await fetch(apiUrl);
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'https://dummyjson.com'}/products?limit=0`;
+        const response = await fetch(apiUrl, { signal: controller.signal });
         if (!response.ok) throw new Error("Failed to fetch products");
 
         const data = await response.json();
@@ -41,13 +43,18 @@ export const ShopProvider = ({ children }) => {
         
         setError(null);
       } catch (err) {
-        setError(err.message || "Something went wrong while fetching products");
-        setProducts([]);
+        if (err.name !== "AbortError") {
+          setError(err.message || "Something went wrong while fetching products");
+          setProducts([]);
+        }
       } finally {
         setLoading(false);
       }
     };
+    
     fetchProducts();
+    
+    return () => controller.abort();
   }, []);
 
   // Add to cart

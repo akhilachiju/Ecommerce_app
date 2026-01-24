@@ -1,6 +1,6 @@
 import React, { memo, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ShopContext } from '../../context/ShopContext';
+import { ShopContext } from '../../context/context';
 import { RiHeartFill } from 'react-icons/ri';
 import { HiOutlineShoppingBag, HiOutlineShare } from 'react-icons/hi';
 import { calculateDiscountedPrice, getStockStatus, generateStarRating, shareProduct } from '../../utils';

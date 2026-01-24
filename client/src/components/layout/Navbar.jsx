@@ -8,7 +8,7 @@ import {
   HiOutlineMenuAlt3,
   HiX,
 } from "react-icons/hi";
-import { ShopContext } from "../../context/ShopContext";
+import { ShopContext } from "../../context/context";
 import { IconWithBadge } from "../common";
 import {
   navbarContainer,

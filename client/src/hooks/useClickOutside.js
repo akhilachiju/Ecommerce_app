@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import logger from '../utils/logger';
 
 export const useClickOutside = (callback) => {
   const ref = useRef();
@@ -32,7 +33,7 @@ export const useLocalStorage = (key, initialValue) => {
       setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      logger.error('Error saving to localStorage:', error);
     }
   };
 

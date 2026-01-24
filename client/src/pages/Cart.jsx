@@ -1,17 +1,13 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShopContext } from "../context/ShopContext";
+import { ShopContext } from "../context/context";
 import {
   Section,
   Container,
-  Button
+  Button,
+  CartItem
 } from "../components";
-import {
-  HiArrowLeft,
-  HiOutlineTrash,
-  HiOutlineShoppingBag
-} from "react-icons/hi";
-import { RiHeartFill } from "react-icons/ri";
+import { HiArrowLeft, HiOutlineShoppingBag } from "react-icons/hi";
 
 const Cart = () => {
   const {
@@ -58,84 +54,16 @@ const Cart = () => {
                   Cart Items
                 </h2>
                 <div className="space-y-4">
-                  {cart.map((item) => {
-                    const isWishlisted = wishlist.includes(item.id);
-                    return (
-                      <div
-                        key={item.id}
-                        className="relative border-b border-gray-100 pb-3 last:border-b-0"
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <Link to={`/product/${item.id}`}>
-                              <img
-                                src={item.thumbnail}
-                                alt={item.title}
-                                className="w-12 h-12 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-                              />
-                            </Link>
-                            <div>
-                              <h3 className="font-medium text-gray-900">
-                                {item.title}
-                              </h3>
-                              <p className="text-green-600 font-semibold">
-                                ${item.price} × {item.quantity}
-                              </p>
-                              <p className="text-xs text-gray-500">
-                                Total: $
-                                {(item.price * item.quantity).toFixed(2)}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <div className="flex items-center bg-gray-100 rounded-xl px-3 py-1">
-                              <button
-                                onClick={() => updateQuantity(item.id, -1)}
-                                className="w-7 h-7 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg font-bold"
-                              >
-                                −
-                              </button>
-                              <span className="mx-3 text-gray-800 font-semibold">
-                                {item.quantity}
-                              </span>
-                              <button
-                                onClick={() => updateQuantity(item.id, 1)}
-                                className="w-7 h-7 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg font-bold"
-                              >
-                                +
-                              </button>
-                            </div>
-                            <button
-                              onClick={() => addToWishlist(item.id)}
-                              className={`
-                            flex items-center justify-center 
-                            w-8 h-8 rounded-full shadow-md hover:shadow-lg 
-                            transition-all duration-300
-                            ${isWishlisted ? "bg-green-50" : "bg-white"}
-                          `}
-                            >
-                              <RiHeartFill
-                                className={`
-                            w-5 h-5 transition-colors duration-200
-                            ${
-                              isWishlisted
-                                ? "text-green-600"
-                                : "text-gray-300 hover:text-green-500"
-                            }
-                          `}
-                              />
-                            </button>
-                            <button
-                              onClick={() => removeFromCart(item.id)}
-                              className="flex items-center justify-center w-8 h-8 rounded-full bg-black hover:bg-red-500 shadow-md hover:shadow-lg transition-all duration-300"
-                            >
-                              <HiOutlineTrash className="w-5 h-5 text-white" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {cart.map((item) => (
+                    <CartItem
+                      key={item.id}
+                      item={item}
+                      onUpdateQuantity={updateQuantity}
+                      onRemove={removeFromCart}
+                      onMoveToWishlist={addToWishlist}
+                      isInWishlist={wishlist.includes(item.id)}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -163,6 +91,10 @@ const Cart = () => {
               <div className="flex justify-between items-center mt-4 text-lg font-bold text-gray-900">
                 <span>Total Price:</span>
                 <span className="text-green-600">${cartTotal}</span>
+              </div>
+              <div className="flex justify-between items-center mt-4 text-lg font-bold text-gray-900">
+                <span>Total Items:</span>
+                <span className="text-green-600">{cart.reduce((total, item) => total + item.quantity, 0)}</span>
               </div>
 
               <div className="flex flex-col gap-3 mt-6">
