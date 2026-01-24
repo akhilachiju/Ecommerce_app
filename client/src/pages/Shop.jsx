@@ -21,12 +21,14 @@ const Shop = () => {
 
   // Generate category list
   const categories = useMemo(() => {
+    if (!products || products.length === 0) return ["All"];
     const allCategories = products.map((p) => p.category);
     return ["All", ...new Set(allCategories)];
   }, [products]);
 
   // Filter products
   const filteredProducts = useMemo(() => {
+    if (!products || products.length === 0) return [];
     return products.filter((product) => {
       const matchesSearch = product.title
         .toLowerCase()

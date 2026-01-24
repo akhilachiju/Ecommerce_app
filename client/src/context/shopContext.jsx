@@ -30,15 +30,15 @@ export const ShopProvider = ({ children }) => {
         }
 
         // Fetch from API if no cache or expired
-        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'https://dummyjson.com'}/products?limit=0`;
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'}/products`;
         const response = await fetch(apiUrl, { signal: controller.signal });
         if (!response.ok) throw new Error("Failed to fetch products");
 
         const data = await response.json();
-        setProducts(data.products);
+        setProducts(data); // Backend returns products directly, not data.products
         
         // Cache the products
-        localStorage.setItem('shopease_all_products', JSON.stringify(data.products));
+        localStorage.setItem('shopease_all_products', JSON.stringify(data));
         localStorage.setItem('shopease_all_products_timestamp', now.toString());
         
         setError(null);
@@ -84,7 +84,7 @@ export const ShopProvider = ({ children }) => {
       prevCart
         .map((item) =>
           item.id === productId
-            ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+            ? { ...item, quantity: item.quantity + amount }
             : item
         )
         .filter((item) => item.quantity > 0)
