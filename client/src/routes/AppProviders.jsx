@@ -1,11 +1,14 @@
 import React from "react";
 import { ShopProvider } from "../context";
+import AuthContextProvider from "../context/AuthContextProvider";
 
 const AppProviders = ({ children }) => {
   return (
-    <ShopProvider>
-      {children}
-    </ShopProvider>
+    <AuthContextProvider>
+      <ShopProvider>
+        {children}
+      </ShopProvider>
+    </AuthContextProvider>
   );
 };
 
