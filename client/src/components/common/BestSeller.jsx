@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ShopContext } from "../../context/ShopContext";
+import { ShopContext } from "../../context/context";
 import { Section, Container, SectionHeader, LoadingSpinner, EmptyState } from "../ui/StateComponents";
 import { Button } from "../ui";
 import ProductCard from "./ProductCard";
