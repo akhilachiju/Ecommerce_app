@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlineStar, HiOutlineCube, HiOutlineQrCode } from "react-icons/hi2";
+import QRCode from "qrcode";
 
 const ProductInfo = ({ 
   title, 
@@ -12,6 +13,22 @@ const ProductInfo = ({
   stock, 
   meta 
 }) => {
+  const [qrCodeUrl, setQrCodeUrl] = useState(null);
+
+  useEffect(() => {
+    // Generate QR code for current product page
+    const generateQR = async () => {
+      try {
+        const productUrl = window.location.href;
+        const qrUrl = await QRCode.toDataURL(productUrl);
+        setQrCodeUrl(qrUrl);
+      } catch (error) {
+        console.error('QR code generation failed:', error);
+      }
+    };
+    generateQR();
+  }, []);
+
   const discountedPrice = (
     price -
     (price * (discountPercentage || 0)) / 100
@@ -50,17 +67,21 @@ const ProductInfo = ({
           </p>
         </div>
 
-        {/* QR Code (if available) */}
-        {meta?.qrCode && (
-          <div className="mt-6 flex items-center gap-3">
-            <HiOutlineQrCode className="w-6 h-6 text-gray-500" />
+        {/* QR Code */}
+        <div className="mt-6 flex items-center gap-3">
+          <HiOutlineQrCode className="w-6 h-6 text-gray-500" />
+          {qrCodeUrl ? (
             <img
-              src={meta.qrCode}
-              alt="QR Code"
+              src={qrCodeUrl}
+              alt="QR Code for this product"
               className="w-20 h-20 border rounded-lg"
             />
-          </div>
-        )}
+          ) : (
+            <div className="w-20 h-20 border rounded-lg bg-gray-100 flex items-center justify-center">
+              <span className="text-xs text-gray-500">Loading...</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
