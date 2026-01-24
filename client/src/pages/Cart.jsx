@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/context";
+import { AuthContext } from "../context/authContext";
 import {
   Section,
   Container,
@@ -19,7 +20,16 @@ const Cart = () => {
     addToWishlist,
   } = useContext(ShopContext);
 
+  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    if (!isAuthenticated) {
+      navigate('/login', { state: { from: '/place-order' } });
+    } else {
+      navigate('/place-order');
+    }
+  };
 
   return (
     <Section background="white" className="min-h-screen">
@@ -99,7 +109,7 @@ const Cart = () => {
 
               <div className="flex flex-col gap-3 mt-6">
                 <Button
-                  onClick={() => alert("Proceeding to checkout...")}
+                  onClick={handleCheckout}
                   className="w-full"
                 >
                   Checkout
